@@ -1,0 +1,10 @@
+<!-- When our index.html file loads, Flask inherits everything from the base template.
+It then looks for a block element (which we called 'content') and injects that content
+into it.
+The word 'content' is just a word that we chose, but we could have called the block
+anything, not just 'content'. -->
+
+{% extends "base.html" %}
+{% block content %}
+    <h1>Home page</h1>
+{% endblock %}

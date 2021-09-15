@@ -1,7 +1,10 @@
 # First in terminal: 'pip3 install Flask'
 
+
 import os
-from flask import Flask # we're importing our Flask class.
+from flask import Flask, render_template 
+                  # we're importing our Flask class.
+                         # we're importing the render_template() function from Flask
 
 
 app = Flask(__name__)
@@ -15,7 +18,7 @@ Flask needs this so that it knows where to look for templates and static files.
 
 @app.route("/")
 def index():
-    return "Hello, world!"
+    return render_template("index.html")
 """
 We're then using the app.route decorator.
 In Python, a decorator starts with the @ symbol, which is also called pie-notation.
@@ -23,7 +26,30 @@ Effectively, a decorator is a way of wrapping functions.
 
 When we try to browse to the root directory, as indicated by the "/", 
 then Flask triggers the index function underneath and returns the "Hello, World" text.
+
+Instead of returning text, we return render_template("index.html"). 
+Flask expects it to be a directory called templates with an 's',
+which should be at the same level as our run.py file.
+
+The root decorator binds the index() function to itself, 
+so that whenever that root is called, the function is called.
+This function is also called a 'view'.
 """
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+
+@app.route("/careers")
+def careers():
+    return render_template("careers.html")
 
 
 if __name__ == "__main__": # The word 'main' wrapped in double-underscores (__main__) is the name of the default module in Python.
