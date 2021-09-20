@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+
+    {% for number in list_of_numbers %} 
+        <p>{{ number }}</p>
+    {% endfor %} <!-- We use the "% notation", because if you remember, that's for statements, not for expressions.
+        This is called 'logic control'. We always need to make sure to stop our for-loop by using the 'endfor' statement. 
+        That way the Jinja templating language knows where the for-loop stops, and doesn't throw any unwanted errors. -->
+
+    
+
     <h2>{{ page_title }}</h2> <!--In this case, the expression being passed through into my HTML file from python, will
         be the 'page_title' that we've just created in run.py-->
     <p>
