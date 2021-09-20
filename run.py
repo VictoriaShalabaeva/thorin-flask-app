@@ -39,17 +39,29 @@ This function is also called a 'view'.
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html", page_title="About")
+"""
+We added in an additional argument.
+I will just call that argument 'page_title'.
+You can call this anything you want, it's not specific to the framework.
+It's just a variable name that I've made up, but could've been called almost anything else,
+except for one of the pre-defined Python variables.
+
+To use this new variable, let's go to the about.html file, and remove the text between
+the <h2> tags at the top.
+I will replace that text with: {{ page_title }}
+Remember, double curly brackets is an expression that's going to display something on the page.
+"""
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact")
 
 
 @app.route("/careers")
 def careers():
-    return render_template("careers.html")
+    return render_template("careers.html", page_title="Careers")
 
 
 if __name__ == "__main__": # The word 'main' wrapped in double-underscores (__main__) is the name of the default module in Python.
