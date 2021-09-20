@@ -2,6 +2,7 @@
 
 
 import os
+import json #  now we want Python to import the data. To do that, we first need to import the JSON library, because we're going to be passing the data that's coming in as JSON.
 from flask import Flask, render_template 
                   # we're importing our Flask class.
                          # we're importing the render_template() function from Flask
@@ -39,7 +40,10 @@ This function is also called a 'view'.
 
 @app.route("/about")
 def about():
-    return render_template("about.html", page_title="About", list_of_numbers=[1, 2, 3])
+    data = [] #  We will initialize an empty array or list called 'data'.
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", company=data)
 """
 We added in an additional argument.
 I will just call that argument 'page_title'.
@@ -51,6 +55,18 @@ To use this new variable, let's go to the about.html file, and remove the text b
 the <h2> tags at the top.
 I will replace that text with: {{ page_title }}
 Remember, double curly brackets is an expression that's going to display something on the page.
+
+We need to have Python open the JSON file in order to read it.
+This is called a 'with' block.
+with open("data/company.json", "r") as json_data: Python is opening the JSON file as "read-only",
+and assigning the contents of the file to a new variable we've created called json_data.
+We need to set our empty 'data' list to equal the parsed JSON data that we've sent through.
+data = json.load(json_data)
+
+Finally, I will pass that list into my return statement, and call it 'company'.
+company=data This is assigning a new variable called 'company'
+that will be sent through to the HTML template, which is equal to the list of data it's loading
+from the JSON file.
 """
 
 
