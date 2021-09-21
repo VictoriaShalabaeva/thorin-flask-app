@@ -2,10 +2,14 @@
 
 
 import os
-import json #  now we want Python to import the data. To do that, we first need to import the JSON library, because we're going to be passing the data that's coming in as JSON.
-from flask import Flask, render_template 
+import json  # now we want Python to import the data. To do that, we first need to import the JSON library, because we're going to be passing the data that's coming in as JSON.
+from flask import Flask, render_template, request, flash
                   # we're importing our Flask class.
                          # we're importing the render_template() function from Flask
+                                          # Request is going to handle things like finding out what method we used, and it will also contain our form object when we've posted it.
+                                                   # 'flashed messages' in Flask
+if os.path.exists("env.py"):
+    import env # Once we save that, a new directory called 'pycache' is created.
 
 
 app = Flask(__name__)
@@ -15,6 +19,7 @@ The first argument of the Flask class, is the name of the application's module -
 Since we're just using a single module, we can use __name__ which is a built-in Python variable.
 Flask needs this so that it knows where to look for templates and static files.
 """
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 @app.route("/")
@@ -87,8 +92,11 @@ The second 'member' is the member object we created above on line 24.
 """
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
