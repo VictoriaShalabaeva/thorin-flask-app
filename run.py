@@ -70,6 +70,23 @@ from the JSON file.
 """
 
 
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {}
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+    return render_template("member.html", member=member)
+"""
+The first argument is going to be our new "member.html" template that we just created.
+The second argument will be "member=member".
+This first 'member' is the variable name being passed through into our html file.
+The second 'member' is the member object we created above on line 24.
+"""
+
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html", page_title="Contact")
