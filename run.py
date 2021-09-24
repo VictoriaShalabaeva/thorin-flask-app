@@ -92,9 +92,9 @@ The second 'member' is the member object we created above on line 24.
 """
 
 
-@app.route("/contact", methods=["GET", "POST"])
+@app.route("/contact", methods=["GET", "PORT"])
 def contact():
-    if request.method == "POST":
+    if request.method == "PORT":
         flash("Thanks {}, we have received your message!".format(
             request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
